@@ -1,6 +1,24 @@
 // Given number 30 return the arrays of all the possibility from 1-30 with last digit number must be 2 whose sum ==30.
 
-
+// result :[
+//     [
+//       2, 2, 2, 2, 2, 2,
+//       2, 2, 2, 2, 2, 2,   ===>SUM = 30 with each data ending with two;
+//       2, 2, 2
+//     ],
+//     [
+//       2, 2, 2, 2, 2, 2,
+//       2, 2, 2, 2, 2, 2,===>SUM = 30
+//       2, 2, 2
+//     ],
+//     [
+//       2, 2, 2, 2,  2,
+//       2, 2, 2, 2, 12 ===>SUM = 30
+//     ],
+//     [ 2, 2, 2, 12, 12 ] ===>SUM = 30
+//   ]
+const n = 30;
+const val = 2;
 
 const result = function solution (n,val){
     const num =  n;
@@ -41,6 +59,6 @@ const result = function solution (n,val){
     const res = calculate(result,num);
     return finalAns;
 
-}(30,'2');
+}(n, val.toString());
 
 console.log(result);
