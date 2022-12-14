@@ -18,7 +18,7 @@
 //     [ 2, 2, 2, 12, 12 ] ===>SUM = 30
 //   ]
 const n = 30;
-const val = 2;
+const val = 5;
 
 const result = function solution (n,val){
     const num =  n;
@@ -61,4 +61,30 @@ const result = function solution (n,val){
 
 }(n, val.toString());
 
-console.log(result);
+// const answer = [...new Set(result.map(data => [...new Set]))];
+console.log("result==>",result);
+const answer = [];
+for (let i = 0; i < result.length; i++) {
+    for (let j = i + 1; j < result.length; j++) {
+        if(arrayEquals(result[i],result[j])){
+            answer.push(result[i]);
+            i++;
+
+        }else{
+            // answer.push(result[j])
+        }
+        // return;
+        
+    }
+    // break;
+}
+
+console.log("Final ans", answer);
+
+
+function arrayEquals(a, b) {
+    return Array.isArray(a) &&
+      Array.isArray(b) &&
+      a.length === b.length &&
+      a.every((val, index) => val === b[index]);
+  }
