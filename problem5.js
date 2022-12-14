@@ -21,4 +21,7 @@ if(arr.length < 2) return arr;
 
 
 
-console.log(customSort([4,5,6,2,3,1]));
+// console.log(customSort([4,5,6,2,3,1]));
+let cc = [1,2,3,4];
+cc.splice(0,cc.length,99);
+console.log(cc);
