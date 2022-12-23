@@ -63,3 +63,16 @@
 // return value;
 // }, " ");    
 // console.log(jsonString);
+// In this example, `JSON.stringify()` is called with 
+// three arguments: the object to be stringified, a replacer function that 
+// increments the `age` property by 10, and a string of two spaces to be used for indentation.
+// The resulting JSON string includes the modified `age` property and is formatted with indentation for readability.
+
+// You can also omit the `replacer` and `space` arguments if you
+//  do not need to modify the values in the object or add white space to the output string. For example:
+//  const jsonString = JSON.stringify(obj);
+//  console.log(jsonString);
+ 
+ /* Output:
+ {"name":"John","age":30,"job":"developer","skills":["JavaScript","Node.js","React"]}
+ */
