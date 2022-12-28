@@ -1,0 +1,20 @@
+{
+  "name": "corejavascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "builderDesignPattern.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KaushalDhakal0/CoreJavascript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KaushalDhakal0/CoreJavascript/issues"
+  },
+  "homepage": "https://github.com/KaushalDhakal0/CoreJavascript#readme"
+}
