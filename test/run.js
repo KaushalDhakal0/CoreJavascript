@@ -16,4 +16,5 @@ function scheduleWork() {
   Promise.resolve().then(() => console.log('m3'));
   Promise.resolve().then(() => console.log('m4'));
   Promise.resolve().then(() => console.log('m5'));
+  console.log("======")
   
