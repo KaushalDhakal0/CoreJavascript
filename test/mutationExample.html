@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mutation Observer Example</title>
+</head>
+
+<body>
+    <div id="target">Hello, World!</div>
+    <div id="idx">Not Hello</div>
+    <script>
+        // Select the target element
+        const target = document.getElementById('target');
+        const target2 = document.getElementById('idx');
+        // Create a new Mutation Observer instance
+        const observer = new MutationObserver((mutationsList, observer) => {
+            // Iterate over the list of mutations
+            for (let mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    console.log('DOM Mutation occurred:', mutation);
+                }
+            }
+        });
+
+        // Configure the observer to listen for changes in child elements
+        const config = { childList: true };
+
+        // Start observing the target element
+        observer.observe(target, config);
+        observer.observe(target2,config);
+        // Perform DOM modifications
+        setTimeout(() => {
+
+            target.innerHTML = '<span>New Content</span>';
+            setTimeout(()=>{
+                target2.innerHTML = `<ul><li>1</li><li>2</li><li>3</li></ul>`
+            },1000)
+        }, 2000);
+    </script>
+</body>
+
+</html>
