@@ -1,5 +1,6 @@
-const handleTask = async(txt) => {
+const handleTask = (txt) => {
     return new Promise((resolve,reject) => {
+        console.log("=-=-=-=");
         if(txt.length > 10){
             resolve(txt);
         }
@@ -16,8 +17,10 @@ const handleTask = async(txt) => {
 
 
 async function rom(){
+    console.log("ghvhgvs");
    const data = await handleTask("dasdasdasdghsdgh");
-   console.log(data);
+   console.log("====",data);
+   
 }
-rom();
+rom()
 console.log("ABCDEFGH");
