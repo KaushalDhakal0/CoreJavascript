@@ -1,16 +1,19 @@
+require('dotenv').config();
 const crypto = require('crypto');
+const mySecretKey = process.env.mySecretKey;
+// const iv = crypto.randomBytes(16); // Generate a secure secret key
+const iv = Buffer.alloc(16);
 
-const secretKey = crypto.randomBytes(32); // Generate a secure secret key
 
 function encryptData(data) {
-  const cipher = crypto.createCipher('aes-256-cbc', secretKey);
+  const cipher = crypto.createCipheriv('aes-256-cbc', mySecretKey, iv);
   let encryptedData = cipher.update(data, 'utf8', 'hex');
   encryptedData += cipher.final('hex');
   return encryptedData;
 }
 
 function decryptData(encryptedData) {
-  const decipher = crypto.createDecipher('aes-256-cbc', secretKey);
+  const decipher = crypto.createDecipheriv('aes-256-cbc', mySecretKey, iv);
   let decryptedData = decipher.update(encryptedData, 'hex', 'utf8');
   decryptedData += decipher.final('utf8');
   return decryptedData;
@@ -22,6 +25,6 @@ const originalData = {
 };
 const stringData = JSON.stringify(originalData);
 const encryptedData = encryptData(stringData);
-console.log('Encrypted Data:', encryptedData);
+console.log('Encrypted Data:===>', encryptedData);
 const decryptedData = decryptData(encryptedData);
-console.log('Decrypted Data:', decryptedData);
+console.log('Decrypted Data:====>', decryptedData);
