@@ -6,7 +6,7 @@ const crypto = require('crypto');
 const readStream  = fs.createReadStream('dta.txt');
 const writeStream = fs.createWriteStream('copy.txt');
 let buffer = Buffer.allocUnsafe(0);
-
+// console.log(buffer.length);
 
 readStream.on('data', (chunk) => {
     // console.log("Chunk-->",chunk);
@@ -32,7 +32,6 @@ readStream.on('error', (error) => {
 writeStream.on('finish',() => {
     console.log("COPY Completed.....");
 })
-console.log("HY=====>");
 
 
 
