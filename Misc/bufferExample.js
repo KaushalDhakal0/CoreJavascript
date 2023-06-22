@@ -1,26 +1,30 @@
 const fs = require('fs');
-const crypto = require('crypto');
-//Creates buffer from given string.
-// const buffer = Buffer.from('[{id:1,name:"Kaushal Dhakal"},{id:1,name:"Kaushal Dhakal"},{id:1,name:"Kaushal Dhakal"}]', 'utf8');
-// console.log("======Buffer====>",buffer.toString());
+const { error } = require('console');
 const readStream  = fs.createReadStream('dta.txt');
-const writeStream = fs.createWriteStream('copy.txt');
+const writeStream = fs.createWriteStream('copy.txt',{ flags: 'a' });
 let buffer = Buffer.allocUnsafe(0);
 // console.log(buffer.length);
 
 readStream.on('data', (chunk) => {
-    // console.log("Chunk-->",chunk);
-    writeStream.write(buffer,(err) => {
-        // console.log("chunnnnnn");
-        if(err){
-            console.log("Error while writing a file");
-        }
-    })
+    // console.log("Chunk-->",chunk.length);
+    buffer = Buffer.concat([buffer, chunk]);
     // buffer += chunk ==> this will automatically convert buffer to String.
     // buffer += chunk;
+    // writeStream.write(buffer.toString(),(err) => {
+    //     if(err){
+    //         console.log("Error while writing a file");
+    //     }
+    // })
+    writeStream.write(buffer,(error) => {
+        if(error){
+            // console.log("---->>>>>",\);
+        }
+        console.log("Copied Successfully");
+    });
+    // console.log("sdpp0--------sa",buffer);
     // Buffer.concat([buffer, chunk]) ==> concatenates on buffer not on string. So we have to convert it into string after opeation has been completrd.
 
-    buffer = Buffer.concat([buffer, chunk]);
+    
 })
 readStream.on('end', ()=>{
     // console.log('Result ', buffer.toString());
