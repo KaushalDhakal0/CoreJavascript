@@ -2,7 +2,7 @@ class MyCustomEventEmitter {
     constructor() {
       this.events = new Map();
     }
-  
+    //Registering Event Listeners.
     on(eventName, cb) {
       if (this.events.has(eventName)) {
         this.events.get(eventName).push(cb);
@@ -10,7 +10,7 @@ class MyCustomEventEmitter {
         this.events.set(eventName, [cb]);
       }
     }
-  
+    //Emitting Events
     emit(callbck, ...rest) {
       rest.forEach(eventX =>{
         if(this.events.has(eventX)){
@@ -18,49 +18,53 @@ class MyCustomEventEmitter {
               callBkLists(null,eventX)
             })
         }else{
-            callbck(`No any listeners for event ==> ${eventX}`,null)
+            callbck(`No any listeners for event: ${eventX}`,null)
         }
       });
+    }
+    //Removing Event Listeners
+    off(eventName, cb){
+      if(this.events.has(eventName)){
+        this.events.delete(eventName);
+      }else{
+        cb('No any registered Events for ', eventName);
+      }
+    }
+    //Listeners will listen for request Only One time.
+    once(eventName, cb) {
+      const wrapper = (...args) => {
+        cb(...args);
+        this.off(eventName, wrapper);
+      }; 
+      this.on(eventName, wrapper);
+    }
+    //retrieving all registered
+    getAllListeners(){
+      return this.events;
     }
   }
   
   const myEvent = new MyCustomEventEmitter();
   
-  myEvent.on('msg', (err, data) => {
+  myEvent.once('msg', (err, data) => {
     if(err){
         console.log("Failed to register Message");
     }else{
-        console.log("Message registered...1",data);
+        console.log("This runs only once");
     }
   });
-  myEvent.on('msg', (err, data) => {
+  myEvent.on('idle', (err, data) => {
     if(err){
-        console.log("Failed to register Message");
+        console.log("Failed to register idle");
     }else{
-        console.log("Message registered...2",data);
+        console.log("Message registered..for eventName:",data);
     }
   });
-  
-  myEvent.on('hunger', (err, data) => {
-    if(err){
-        console.log("Failed to register Hunger");
-    }else{
-        console.log("Hunger registered..1.",data);
-    }
-  });
-  myEvent.on('hunger', (err, data) => {
-    if(err){
-        console.log("Failed to register Hunger");
-    }else{
-        console.log("Hunger registered..2.",data);
-    }
-  });
-  
+  console.log("All Listeners ===>",myEvent.getAllListeners());
   myEvent.emit((err) =>{
     if(err){
-        // throw new Error(err);
         console.log(err);
     }
-  },'hunger','msg','sd');
+  },'msg','msg','idle', 'idle');
 
   
